@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=11">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-logo"><a href="{% url 'dashboard' %}">Healthcare for Good</a></div>
+</nav>
+
+<div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
+{% include 'sidebar.html' %}
+
+<div class="prediction-container">
+
+<h2>📊 Your Reports</h2>
+
+<h3>Heart</h3>
+{% for p in heart_predictions %}
+<p>{{ p.result }}</p>
+{% empty %}<p>No data</p>{% endfor %}
+
+<h3>Diabetes</h3>
+{% for p in diabetes_predictions %}
+<p>{{ p.result }}</p>
+{% empty %}<p>No data</p>{% endfor %}
+
+<h3>Menstrual</h3>
+{% for p in menstrual_predictions %}
+<p>{{ p.result }}</p>
+{% empty %}<p>No data</p>{% endfor %}
+
+</div>
+
+<script>
+function toggleSidebar() {
+    let sidebar = document.getElementById("sidebar");
+    sidebar.style.left = (sidebar.style.left === "0px") ? "-260px" : "0px";
+}
+</script>
+
+</body>
+</html>

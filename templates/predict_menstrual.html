@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menstrual Health Prediction</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=10">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-logo">
+        <a href="{% url 'dashboard' %}">Healthcare for Good</a>
+    </div>
+    <div class="navbar-links">
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+    <!-- CONTENT -->
+    <div class="prediction-container">
+
+        <div class="prediction-header">
+            <h2>🌸 Menstrual Health Analysis</h2>
+            <p>Track your cycle and understand your health better</p>
+        </div>
+
+        <!-- FORM -->
+        <div class="form-card">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <input type="number" name="cycle_length" placeholder="Cycle Length" required>
+                    <input type="number" name="bleeding_days" placeholder="Bleeding Days" required>
+                </div>
+
+                <div class="form-row">
+                    <input type="number" name="pain_level" placeholder="Pain Level" required>
+                    <input type="number" name="stress" placeholder="Stress Level" required>
+                </div>
+
+                <div class="form-row">
+                    <input type="number" step="0.1" name="sleep" placeholder="Sleep Hours" required>
+                    <input type="number" step="0.1" name="weight_change" placeholder="Weight Change" required>
+                </div>
+
+                <button type="submit">Analyze</button>
+            </form>
+        </div>
+
+        <!-- RESULT -->
+        {% if result %}
+        <div class="result-card">
+
+            <h3>
+                Cycle Status:
+                <span class="{% if result == 'Irregular Cycle' %}risk-high{% else %}risk-low{% endif %}">
+                    {{ result }}
+                </span>
+            </h3>
+
+            {% if result == "Irregular Cycle" %}
+                <p class="warning-text">⚠️ Irregular Cycle — Consult a doctor</p>
+            {% else %}
+                <p class="safe-text">✅ Normal Healthy Cycle</p>
+            {% endif %}
+
+            <div class="charts-grid">
+                {% if chart_bar %}
+                    <img src="data:image/png;base64,{{ chart_bar }}">
+                {% endif %}
+                {% if chart_pie %}
+                    <img src="data:image/png;base64,{{ chart_pie }}">
+                {% endif %}
+            </div>
+
+        </div>
+        {% endif %}
+
+        <!-- NEXT STEPS -->
+        <div class="next-steps">
+            <h4>Next Steps:</h4>
+            <div class="options-grid">
+                <a href="{% url 'doctors' %}" class="option-card">Consult Doctor 🩺</a>
+                <a href="#" class="option-card">Medicines 💊</a>
+                <a href="#" class="option-card">Lifestyle 🍔</a>
+                <a href="#" class="option-card">Health Blogs 📖</a>
+                <a href="#" class="option-card">Healthcare 🧴</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

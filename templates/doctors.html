@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="GET">
+    <input name="q" placeholder="Search doctor">
+    <input name="spec" placeholder="Specialization">
+    <button class="btn btn-primary">Search</button>
+</form>
+
+<hr>
+
+{% for d in doctors %}
+<div class="card p-3 mb-2">
+    <h4>{{ d.name }}</h4>
+    <p>{{ d.specialization }} - {{ d.hospital }}</p>
+    <a href="/book/{{ d.id }}" class="btn btn-success">Book</a>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Book Appointment with {{ doctor.name }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="date" name="date"><br><br>
+    <textarea name="problem" placeholder="Problem"></textarea><br><br>
+    <button class="btn btn-success">Book</button>
+</form>
+
+{% endblock %}

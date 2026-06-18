@@ -1,0 +1,16 @@
+<div id="sidebar" class="sidebar">
+
+    <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">×</a>
+
+    <h3>📊 Menu</h3>
+
+    <a href="{% url 'dashboard' %}">🏠 Dashboard</a>
+    <a href="{% url 'predict_heart' %}">❤️ Heart</a>
+    <a href="{% url 'predict_diabetes' %}">🩸 Diabetes</a>
+    <a href="{% url 'predict_menstrual' %}">🌸 Menstrual</a>
+
+    <hr>
+
+    <a href="{% url 'logout' %}" class="logout">🚪 Logout</a>
+
+</div>

@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-logo"><a href="{% url 'home' %}">Healthcare for Good</a></div>
+    <div class="navbar-links">
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</nav>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h2>Welcome, {{ user.username }}! 👋</h2>
+        <p>What are you looking for today?</p>
+    </div>
+
+    <div class="options-grid">
+        <!-- Heart Disease -->
+        <a href="{% url 'predict_heart' %}" class="option-card">
+            <i class="fa-solid fa-heart-pulse fa-3x"></i>
+            <span>Check for Heart Disease</span>
+        </a>
+
+        <!-- Diabetes -->
+        <a href="{% url 'predict_diabetes' %}" class="option-card">
+            <i class="fa-solid fa-droplet fa-3x"></i>
+            <span>Check for Diabetes</span>
+        </a>
+
+        <!-- Menstruation -->
+        <a href="{% url 'predict_menstrual' %}" class="option-card">
+            <i class="fa-solid fa-circle-check fa-3x"></i>
+            <span>Check for Menstruation</span>
+        </a>
+
+        <!-- Consult Doctor -->
+        <a href="{% url 'doctors' %}" class="option-card">
+            <i class="fa-solid fa-user-doctor fa-3x"></i>
+            <span>Consult a Doctor</span>
+        </a>
+
+        <!-- Health Blogs -->
+        <a href="#" class="option-card">
+            <i class="fa-solid fa-blog fa-3x"></i>
+            <span>Health Blogs</span>
+        </a>
+
+        <!-- Medicine -->
+        <a href="#" class="option-card">
+            <i class="fa-solid fa-pills fa-3x"></i>
+            <span>Medicine</span>
+        </a>
+
+        <!-- Healthcare -->
+        <a href="#" class="option-card">
+            <i class="fa-solid fa-kit-medical fa-3x"></i>
+            <span>Healthcare</span>
+        </a>
+
+        <!-- Lifestyle -->
+        <a href="#" class="option-card">
+            <i class="fa-solid fa-burger fa-3x"></i>
+            <span>Lifestyle</span>
+        </a>
+    </div>
+</div>
+</body>
+</html>

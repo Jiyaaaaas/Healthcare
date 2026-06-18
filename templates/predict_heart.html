@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Disease Prediction</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=5">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-logo"><a href="{% url 'dashboard' %}">Healthcare for Good</a></div>
+        <div class="navbar-links">
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </nav>
+
+    <br><br>
+    <div class="prediction-container">
+        <h2>❤️ Heart Disease Prediction</h2>
+        <p>Fill in the details below to check your heart disease risk.</p>
+
+        <div class="form-card">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <input type="number" name="age" placeholder="Age" min="1" required>
+                    <select name="sex" required>
+                        <option value="">Sex</option>
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <select name="chestpain" required>
+                        <option value="">Chest Pain Type</option>
+                        <option value="0">TA</option>
+                        <option value="1">ATA</option>
+                        <option value="2">NAP</option>
+                        <option value="3">ASY</option>
+                    </select>
+                    <input type="number" name="restingbp" placeholder="Resting BP" required>
+                </div>
+
+                <div class="form-row">
+                    <input type="number" name="cholesterol" placeholder="Cholesterol" required>
+                    <select name="fastingbs" required>
+                        <option value="">Fasting Blood Sugar >120 mg/dl?</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <input type="number" name="maxhr" placeholder="Max Heart Rate" required>
+                    <select name="exerciseangina" required>
+                        <option value="">Exercise Induced Angina?</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <input type="number" step="0.1" name="oldpeak" placeholder="ST Depression (Oldpeak)" required>
+                    <select name="st_slope" required>
+                        <option value="">ST Slope</option>
+                        <option value="0">Up</option>
+                        <option value="1">Flat</option>
+                        <option value="2">Down</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Predict</button>
+            </form>
+        </div>
+
+        {% if result %}
+<div class="result-card">
+    <h3>Prediction Result: <span class="risk">{{ result }}</span></h3>
+
+    {% if result == "High Risk" %}
+        <p style="color:red; font-weight:bold;">⚠️ Consult a Doctor Immediately</p>
+    {% endif %}
+
+    <div class="charts-grid">
+        <img src="data:image/png;base64,{{ chart_bar }}">
+        <img src="data:image/png;base64,{{ chart_pie }}">
+        <img src="data:image/png;base64,{{ chart_hist }}">
+        <img src="data:image/png;base64,{{ chart_importance }}">
+    </div>
+</div>
+{% endif %}
+
+        <div class="next-steps">
+            <h4>Next Steps:</h4>
+            <div class="options-grid">
+                <a href="{% url 'doctors' %}" class="option-card">Consult Doctor 🩺</a>
+                <a href="#" class="option-card">Medicines 💊</a>
+                <a href="#" class="option-card">Lifestyle 🍔</a>
+                <a href="#" class="option-card">Health Blogs 📖</a>
+                <a href="#" class="option-card">Healthcare 🧴</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

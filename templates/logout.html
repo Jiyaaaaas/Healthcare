@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=12">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-logo">
+        <a href="{% url 'dashboard' %}">Healthcare for Good</a>
+    </div>
+</nav>
+
+<div class="logout-page">
+
+    <div class="logout-card">
+        <h2>Log-out</h2>
+        <p>Are you sure you want to logout?</p>
+
+        <div class="logout-buttons">
+            <form method="post" style="margin:0;">
+                {% csrf_token %}
+                <button type="submit" class="btn-yes">Yes</button>
+            </form>
+
+            <a href="{% url 'dashboard' %}" class="btn-cancel">Cancel</a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Diabetes Prediction</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input name="glucose" placeholder="Glucose"><br><br>
+    <input name="bmi" placeholder="BMI"><br><br>
+    <input name="age" placeholder="Age"><br><br>
+    <button class="btn btn-primary">Predict</button>
+</form>
+
+{% if result %}
+<h3>{{ result }}</h3>
+{% endif %}
+
+{% endblock %}
